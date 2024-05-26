@@ -869,7 +869,7 @@ def app(df, current_dir: Path):
             st.write("Модель загружена из сохраненного файла.")
         except Exception as e:
             F_error = 1
-        if os.path.exists(model_path) or F_error == 1:
+        if not os.path.exists(model_path) or F_error == 1:
             tuner_dir = 'tuner_dir'
             project_name = 'complex_nn_model'
 
