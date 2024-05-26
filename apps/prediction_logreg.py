@@ -859,37 +859,17 @@ def app(df, current_dir: Path):
         )
         return model
 
-    def get_tuner(X_train):
-        tuner_dir = 'tuner_dir'
-        project_name = 'complex_nn_model'
-
-        if not os.path.exists(tuner_dir):
-            os.makedirs(tuner_dir)
-
-        tuner = RandomSearch(
-            build_model,
-            objective='val_AUC',
-            max_trials=50,
-            executions_per_trial=2,
-            directory=tuner_dir,
-            project_name=project_name
-        )
-
-        # Проверяем, существует ли уже сохранённый поиск
-        if os.path.exists(os.path.join(tuner_dir, project_name, "oracle.json")):
-            tuner.reload()
-
-        return tuner
-
     def build_and_train_best_model(X_train, y_train, X_test, y_test, model_path, history_path):
-        if os.path.exists(model_path):
+        F_error = 0
+        try:
             from keras.models import load_model
             best_model = load_model(model_path)
             with open(history_path, 'r') as f:
                 history = json.load(f)
             st.write("Модель загружена из сохраненного файла.")
-
-        else:
+        except Exception as e:
+            F_error = 1
+        if os.path.exists(model_path) or F_error == 1:
             tuner_dir = 'tuner_dir'
             project_name = 'complex_nn_model'
 
