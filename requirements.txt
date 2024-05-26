@@ -19,5 +19,6 @@ seaborn
 altair
 pygwalker
 jupyterlab
+tensorflow
 keras
 json
