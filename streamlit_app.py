@@ -119,6 +119,8 @@ class Menu:
             titles = [app["title"] for app in self.apps]
             icons = [app["icon"] for app in self.apps]
 
+            st.sidebar.image(str(current_dir / 'images' / 'img.png'))
+            
             selected = option_menu(
                 "Меню",
                 options=titles,
