@@ -21,3 +21,4 @@ pygwalker
 jupyterlab
 tensorflow
 keras
+keras_tuner 
