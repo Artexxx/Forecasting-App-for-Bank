@@ -721,7 +721,8 @@ def app(df, current_dir: Path):
 
     for var, c in zip(variables, coef):
         sign = "+" if c >= 0 else "-"
-        formula += f" {sign} {abs(c):.3f} \\cdot {var.replace('_', r'\_')}"
+        formula += " {} {:.3f} \\cdot {}".format(sign, abs(c), var.replace('_', r'\_'))
+
     st.markdown(r"""
         ## Полученная логистическая функция
         $$
