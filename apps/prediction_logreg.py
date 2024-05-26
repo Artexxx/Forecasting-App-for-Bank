@@ -1321,17 +1321,21 @@ def app(df, current_dir: Path):
 
         # Прогнозирование
         if model_choice == "Logistic Regression":
-            predict = log_reg.predict(X_test_df)
+            predict = 1- log_reg.predict(X_test_df)
+            pred_proba = log_reg.predict_proba(X_test_df)[:,0]
         else:
             predict = (best_model.predict(X_test_df) > 0.5).astype("int32")
+            pred_proba = best_model.predict(X_test_df)
 
         # Вывод предсказаний с сохранением информации о строке и странице
         results = pd.DataFrame({
             'CLIENT_ID': test_df['CLIENT_ID'],
             'ROW': test_df['ROW'],
             'PAGE': test_df['PAGE'],
-            'PREDICT': predict.flatten()
+            'PREDICT': predict.flatten(),
+            'PREDICT_PROBA': pred_proba.flatten()
         })
+
 
         st.header("Результаты прогнозирования")
         credit_results = results[results['PAGE'] == 'кредиты']
