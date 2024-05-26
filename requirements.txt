@@ -21,4 +21,5 @@ pygwalker
 jupyterlab
 tensorflow
 keras
-keras_tuner 
+keras_tuner
+openpyxl
