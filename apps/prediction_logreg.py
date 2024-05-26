@@ -1226,7 +1226,6 @@ def app(df, current_dir: Path):
     st.image(str(current_dir / "images" / "example.png"), use_column_width='auto')
     uploaded_file = st.file_uploader("Выберите файл Excel", type=["xlsx"])
 
-    @st.cache_data
     def load_and_process_file(uploaded_file, is_test=False):
         client_ds = pd.read_excel(uploaded_file, sheet_name='клиенты').drop_duplicates()
         credit_ds = pd.read_excel(uploaded_file, sheet_name='кредиты').drop_duplicates()
